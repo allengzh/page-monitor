@@ -1,0 +1,89 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "github:allengzh/page-monitor",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "github:allengzh/page-monitor",
+        "spec": "github:allengzh/page-monitor",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:allengzh/page-monitor.git",
+          "sshUrl": "git+ssh://git@github.com/allengzh/page-monitor.git",
+          "httpsUrl": "git+https://github.com/allengzh/page-monitor.git",
+          "gitUrl": "git://github.com/allengzh/page-monitor.git",
+          "shortcut": "github:allengzh/page-monitor",
+          "directUrl": "https://raw.githubusercontent.com/allengzh/page-monitor/master/package.json"
+        }
+      },
+      "D:\\myapp\\page-monitor-demo"
+    ]
+  ],
+  "_from": "allengzh/page-monitor",
+  "_id": "page-monitor@0.5.4",
+  "_inCache": true,
+  "_location": "/page-monitor",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "github:allengzh/page-monitor",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "github:allengzh/page-monitor",
+    "spec": "github:allengzh/page-monitor",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:allengzh/page-monitor.git",
+      "sshUrl": "git+ssh://git@github.com/allengzh/page-monitor.git",
+      "httpsUrl": "git+https://github.com/allengzh/page-monitor.git",
+      "gitUrl": "git://github.com/allengzh/page-monitor.git",
+      "shortcut": "github:allengzh/page-monitor",
+      "directUrl": "https://raw.githubusercontent.com/allengzh/page-monitor/master/package.json"
+    }
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git://github.com/allengzh/page-monitor.git#5f1f37b8bc1d57274679b19a17a9dd3afbb3f5c2",
+  "_shasum": "3961f6187fce92c0b4cc085fd9d774c9366a83d3",
+  "_shrinkwrap": null,
+  "_spec": "github:allengzh/page-monitor",
+  "_where": "D:\\myapp\\page-monitor-demo",
+  "author": {
+    "name": "fouber",
+    "email": "fouber.NET@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/fouber/page-monitor/issues"
+  },
+  "dependencies": {},
+  "description": "monitor pages and diff the dom change with phantomjs",
+  "devDependencies": {},
+  "gitHead": "5f1f37b8bc1d57274679b19a17a9dd3afbb3f5c2",
+  "homepage": "https://github.com/fouber/page-monitor",
+  "keywords": [
+    "monitor",
+    "phantomjs",
+    "phantom",
+    "diff"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "page-monitor",
+  "optionalDependencies": {},
+  "readme": "## Page Monitor\r\n\r\n> capture webpage and diff the dom change with [phantomjs](http://phantomjs.org/)\r\n\r\n## Effects\r\n\r\n### Element Add\r\n\r\n![element add](./demo/1409037825746-1409037838093.png)\r\n\r\n### Element Removed\r\n\r\n![element removed](./demo/1409037838093-1409037882033.png)\r\n\r\n### Text Changed\r\n\r\n![element removed](./demo/1409037882033-1409037916727.png)\r\n\r\n### Style Changed\r\n\r\n![element removed](./demo/1409038130483-1409038137417.png)\r\n\r\n## Make UI to show diffs of history\r\n\r\n> https://github.com/fouber/pmui\r\n\r\n![ui](./demo/ui.png?v=3)\r\n\r\n## Usage\r\n\r\n> First of all, install [phantomjs](http://phantomjs.org/download.html), page-monitor relys on [phantomjs](http://phantomjs.org/) to render webpage and genenrate screenshot. DO NOT use ``npm`` to install phantomjs on winidows, it can't be launched by ``spawn``.\r\n\r\n```javascript\r\nvar Monitor = require('page-monitor');\r\n\r\nvar url = 'http://www.google.com';\r\nvar monitor = new Monitor(url);\r\nmonitor.capture(function(code){\r\n    console.log(monitor.log); // from phantom\r\n    console.log('done, exit [' + code + ']');\r\n});\r\n```\r\n\r\n## API\r\n\r\n### Monitor\r\n\r\n```javascript\r\nvar monitor = new Monitor(url [, options]);\r\n```\r\n\r\nsee the default options here: [https://github.com/fouber/page-monitor/blob/master/index.js](https://github.com/fouber/page-monitor/blob/master/index.js#L57-L179) , you can override any option for your monitoring.\r\n\r\n### monitor.capture(callback [, noDiff]);\r\n\r\ncaputure webpage and save screenshot, then diff with last save.\r\n\r\n```javascript\r\nvar monitor = new Monitor(url, options);\r\nmonitor.on('debug', function (data) {\r\n    console.log('[DEBUG] ' + data);\r\n});\r\nmonitor.on('error', function (data) {\r\n    console.error('[ERROR] ' + data);\r\n});\r\nmonitor.capture(function(code){\r\n    console.log(monitor.log.info); // diff result\r\n    console.log('[DONE] exit [' + code + ']');\r\n});\r\n```\r\n\r\n### monitor.diff(left, right, callback);\r\n\r\ndiff change between left(date.getTime()) and right(date.getTime()).\r\n\r\n```javascript\r\nvar monitor = new Monitor(url, options);\r\nmonitor.on('debug', function (data) {\r\n    console.log('[DEBUG] ' + data);\r\n});\r\nmonitor.on('error', function (data) {\r\n    console.error('[ERROR] ' + data);\r\n});\r\nmonitor.diff(1408947323420, 1408947556898, function(code){\r\n    console.log(monitor.log.info); // diff result\r\n    console.log('[DONE] exit [' + code + ']');\r\n});\r\n```\r\n\r\n### events\r\n\r\n```javascript\r\nvar monitor = new Monitor(url);\r\nmonitor.on('debug', function (data) {\r\n    console.log('[DEBUG] ' + data);\r\n});\r\nmonitor.on('error', function (data) {\r\n    console.error('[ERROR] ' + data);\r\n});\r\n```\r\n\r\n* ``debug``: debug from phantom\r\n* ``notice``: console from webpage\r\n* ``info``: info from phantom\r\n* ``warning``: error from webpage\r\n* ``error``: error from phantom\r\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fouber/page-monitor.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.5.4"
+}
