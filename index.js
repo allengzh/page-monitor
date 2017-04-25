@@ -83,7 +83,7 @@ function mergeSettings(settings){
             invisibleElements : [
                 'applet', 'area', 'audio', 'base', 'basefont',
                 'bdi', 'bdo', 'big', 'br', 'center', 'colgroup',
-                'datalist', 'form', 'frameset', 'head', 'link',
+                'datalist', 'frameset', 'head', 'link',
                 'map', 'meta', 'noframes', 'noscript', 'optgroup',
                 'option', 'param', 'rp', 'rt', 'ruby', 'script',
                 'source', 'style', 'title', 'track', 'xmp'
@@ -91,7 +91,7 @@ function mergeSettings(settings){
             ignoreChildrenElements: [
                 'img', 'canvas', 'input', 'textarea', 'audio',
                 'video', 'hr', 'embed', 'object', 'progress',
-                'select', 'table'
+                'select'
             ],
             styleFilters: [
                 'margin-left', 'margin-top', 'margin-right', 'margin-bottom',
