@@ -345,29 +345,29 @@ Monitor.prototype._initLog = function(){
  * output json
  * @private
  */
-Monitor.prototype._outputJson = function(log){
-    var info = log.info[0];
-    if (info) {
-        info = JSON.parse(info);
-        var json = {
-            diff: info,
-            error: log.error,
-            warning: log.warning
-        }
+// Monitor.prototype._outputJson = function(log){
+//     var info = log.info[0];
+//     if (info) {
+//         info = JSON.parse(info);
+//         var json = {
+//             diff: info,
+//             error: log.error,
+//             warning: log.warning
+//         }
 
-        console.log(json);
-        var jpg = info.diff.screenshot;
-        var outputFilename = jpg.replace('jpg', 'json');
+//         console.log(json);
+//         var jpg = info.diff.screenshot;
+//         var outputFilename = jpg.replace('jpg', 'json');
 
-        fs.writeFile(outputFilename, JSON.stringify(json, null, 4), function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("JSON saved to " + outputFilename);
-            }
-        });
-    }
-};
+//         fs.writeFile(outputFilename, JSON.stringify(json, null, 4), function(err) {
+//             if (err) {
+//                 console.log(err);
+//             } else {
+//                 console.log("JSON saved to " + outputFilename);
+//             }
+//         });
+//     }
+// };
 
 /**
  * capture webpage and diff
@@ -394,7 +394,7 @@ Monitor.prototype.capture = function(callback, noDiff){
         function(code, log){
             // TODO with code
             self.running = false;
-            self._outputJson(self.log);
+            // self._outputJson(self.log);
             callback.call(self, code, log);
         }
     );
